@@ -1,12 +1,18 @@
 package model;
 
-import java.util.List;
+
 
 public class ToysShop {
-    private List<Toy> toys;
+    public ToysList toys;
+    public ToysDraw draw;
 
-    public ToysShop(List<Toy> toys){
-        this.toys = toys;
+    private ToysShop(ToysList toys, ToysDraw draw) {
+        this.toys = new ToysList();
+        this.draw = new ToysDraw();
+    }
+
+    public ToysShop() {
+        this(new ToysList(), new ToysDraw());
     }
     
 }
