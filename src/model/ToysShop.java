@@ -1,7 +1,5 @@
 package model;
 
-
-
 public class ToysShop {
     public ToysList toys;
     public ToysDraw draw;
@@ -14,5 +12,10 @@ public class ToysShop {
     public ToysShop() {
         this(new ToysList(), new ToysDraw());
     }
-    
+
+    public void addToy(String name, int quantity, int weight) {
+        Toy new_toy = new Toy(name, quantity, weight);
+        this.toys.addToy(new_toy);
+    }
+
 }

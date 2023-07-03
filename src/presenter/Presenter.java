@@ -15,7 +15,7 @@ public class Presenter {
     }
 
     public void addToy(String name, int quantity, int weight) {
-        
+        this.toysShop.addToy(name, quantity, weight);
     }
 
 
