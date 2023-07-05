@@ -18,5 +18,17 @@ public class Presenter {
         this.toysShop.addToy(name, quantity, weight);
     }
 
+    public void showToys() {
+        view.print(this.toysShop.showToys());
+    }
+
+    public void chooseGiftToy() {
+        view.print("Выпала призовая игрушка - " + this.toysShop.chooseGiftToy());
+    }
+    
+    public void editWeightToy(int id, int weight) {
+        view.print(this.toysShop.editWeightToy(id, weight));
+    }
+
 
 }

@@ -17,7 +17,8 @@ public class Console {
         this.work = true;
         this.menu = new ArrayList<>(Arrays.asList("Главное меню:",
                 "Добавить игрушку",
-                "Изменить игрушку",
+                "Показать все игрушки",
+                "Изменить вес выпадения игрушки",
                 "Определить призовую игрушку",
                 "Выдать призовую игрушку",
                 "Выход"));
@@ -34,18 +35,23 @@ public class Console {
     public void start() {
         while (work) {
             System.out.println(menu());
-            int key = input_menu();
+            int key = inputMenu();
             switch (key) {
                 case 1:
                     addToy();
                     break;
                 case 2:
-                    break;
+                    showToys();
+                    break;    
                 case 3:
+                    editWeightToy();
                     break;
                 case 4:
+                    chooseGiftToy();
                     break;
                 case 5:
+                    break;
+                case 6:
                     exit();
                     break;
             }
@@ -53,18 +59,37 @@ public class Console {
 
     }
 
+    public void chooseGiftToy() {
+        this.presenter.chooseGiftToy();
+    }
+    
+    public void editWeightToy() {
+        System.out.println("Изменение веса игрушки");
+        int toyId = inputId();
+        int toyWeight = inputWeight();
+        if ((toyId != -1) && (toyWeight != -1)) {
+            this.presenter.editWeightToy(toyId, toyWeight);
+            // System.out.println("Вес игрушки успешно изменен");
+        }
+    }
+    
+    public void showToys() {
+        System.out.println("Список игрушек:");
+        this.presenter.showToys();
+    }
+
    
 
-    public int input_menu() {
+    public int inputMenu() {
         System.out.print("Выберите один из пунктов меню: ");
         String inputData = this.scanner.nextLine();
         if (checkTextIsNumber(inputData)) {
             int inputNumber = Integer.parseInt(inputData);
-            int menu_size = menu.size();
-            if ((inputNumber > 0) && (inputNumber < menu_size)) {
+            int menuSize = menu.size();
+            if ((inputNumber > 0) && (inputNumber < menuSize)) {
                 return inputNumber;
             } else {
-                System.out.printf("\nВведено недопустимое число. Введите значение от 1 до %d\n", menu_size - 1);
+                System.out.printf("\nВведено недопустимое число. Введите значение от 1 до %d\n", menuSize - 1);
                 return 0;
             }
         } else {
@@ -73,27 +98,16 @@ public class Console {
         }
     }
 
-    public String input_name() {
-        System.out.println("Введите имя игрушки: ");
-        String input_name = this.scanner.nextLine();
-        if ((input_name.length() == 0) && (input_name != null)) {
-            System.out.println("Имя игрушки не может быть пустым");
-            return null;
-        } else {
-            return input_name;
-        }
-    }
-    
-    public int input_quantity() {
-        System.out.println("Введите количество игрушек: ");
-        String input_quantity = this.scanner.nextLine();
-        if (checkTextIsNumber(input_quantity)) {
-            int int_quantity = Integer.parseInt(input_quantity);
-            if (int_quantity <= 0) {
-                System.out.println("Вводимое количество должно быть положительным целым числом");
+        public int inputId() {
+        System.out.println("Введите id игрушки для изменения ее веса: ");
+        String inputId = this.scanner.nextLine();
+        if (checkTextIsNumber(inputId)) {
+            int intId = Integer.parseInt(inputId);
+            if (intId <= 0) {
+                System.out.println("Id должно быть положительным целым числом");
                 return -1;
             } else {
-                return int_quantity;
+                return intId;
             }
         } else {
             System.out.println("Введенные данные не являются числом");
@@ -101,16 +115,45 @@ public class Console {
         }
     }
 
-    public int input_weight() {
+
+    public String inputName() {
+        System.out.println("Введите имя игрушки: ");
+        String inputName = this.scanner.nextLine();
+        if ((inputName.length() == 0) && (inputName != null)) {
+            System.out.println("Имя игрушки не может быть пустым");
+            return null;
+        } else {
+            return inputName;
+        }
+    }
+    
+    public int inputQuantity() {
+        System.out.println("Введите количество игрушек: ");
+        String inputQuantity = this.scanner.nextLine();
+        if (checkTextIsNumber(inputQuantity)) {
+            int intQuantity = Integer.parseInt(inputQuantity);
+            if (intQuantity <= 0) {
+                System.out.println("Вводимое количество должно быть положительным целым числом");
+                return -1;
+            } else {
+                return intQuantity;
+            }
+        } else {
+            System.out.println("Введенные данные не являются числом");
+            return -1;
+        }
+    }
+
+    public int inputWeight() {
             System.out.println("Введите вес игрушки: ");
-            String input_weight = this.scanner.nextLine();
-            if (checkTextIsNumber(input_weight)) {
-                int int_weight = Integer.parseInt(input_weight);
-                if ((int_weight <= 0) || (int_weight > 100)) {
+            String inputWeight = this.scanner.nextLine();
+            if (checkTextIsNumber(inputWeight)) {
+                int intWeight = Integer.parseInt(inputWeight);
+                if ((intWeight <= 0) || (intWeight > 100)) {
                     System.out.println("Вес игрушки должно быть положительным целым числом от 1 до 100");
                     return -1;
                 } else {
-                    return int_weight;
+                    return intWeight;
                 }
             }
             else {
@@ -121,11 +164,11 @@ public class Console {
 
     public void addToy() {
         System.out.println("Добавление игрушки");
-        String toy_name = input_name();
-        int toy_quantity = input_quantity();
-        int toy_weight = input_weight();
-        if ((toy_name != null) && (toy_quantity != -1) && (toy_weight != -1)) {
-            this.presenter.addToy(toy_name, toy_quantity, toy_weight);
+        String toyName = inputName();
+        int toyQuantity = inputQuantity();
+        int toyWeight = inputWeight();
+        if ((toyName != null) && (toyQuantity != -1) && (toyWeight != -1)) {
+            this.presenter.addToy(toyName, toyQuantity, toyWeight);
             System.out.println("Игрушка успешно добавлена");
         }
 

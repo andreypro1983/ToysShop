@@ -1,13 +1,13 @@
 package model;
 
-public class Toy implements Comparable <Toy> {
-    private int id = 0;
+public class Toy implements Comparable<Toy> {
+    private int id;
     private String name;
     private int quantity;
     private int weight;
 
     public Toy(String name, int quantity, int weight) {
-        this.id += 1;
+        this.id = 0;
         this.name = name;
         this.quantity = quantity;
         this.weight = weight;
@@ -39,7 +39,7 @@ public class Toy implements Comparable <Toy> {
 
     
 
-
+    
 
     public void setId(int id) {
         this.id = id;
@@ -55,6 +55,10 @@ public class Toy implements Comparable <Toy> {
 
     public void setWeight(int weight) {
         this.weight = weight;
+    }
+
+    public String toString() {
+        return "id: " + this.id + " name: " + this.name + " weight: " + this.weight;
     }
 
 

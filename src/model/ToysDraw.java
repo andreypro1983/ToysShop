@@ -17,6 +17,25 @@ public class ToysDraw {
         this.drawToys = new LinkedList<Toy>();
     }
 
+    public LinkedList<Toy> getDrawToys() {
+        return drawToys;
+    }
+
+    
+    public void chooseGiftToy() {
+        
+    }
+    
+    public void setToys(ToysList toys) {
+        this.toys = toys;
+    }
+
+
+
+    public ToysList getToys() {
+        return toys;
+    }
+
 
     
     
