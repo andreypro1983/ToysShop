@@ -20,6 +20,10 @@ public class ToysList {
         this.toys.add(toy);
     }
 
+    public void removeToy(Toy toy) {
+        this.toys.remove(toy);
+    }
+
     public void editWeightToy(Toy toy, int weight) {
         toy.setWeight(weight);
     }

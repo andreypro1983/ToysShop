@@ -23,7 +23,11 @@ public class Presenter {
     }
 
     public void chooseGiftToy() {
-        view.print("Выпала призовая игрушка - " + this.toysShop.chooseGiftToy());
+        view.print(this.toysShop.chooseGiftToy());
+    }
+
+    public void giveGiftToy() {
+        view.print(this.toysShop.giveGiftToy());
     }
     
     public void editWeightToy(int id, int weight) {

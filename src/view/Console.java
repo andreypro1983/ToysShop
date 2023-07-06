@@ -50,6 +50,7 @@ public class Console {
                     chooseGiftToy();
                     break;
                 case 5:
+                    giveGiftToy();
                     break;
                 case 6:
                     exit();
@@ -60,11 +61,12 @@ public class Console {
     }
 
     public void chooseGiftToy() {
+        System.out.println("\nОПРЕДЕЛЕНИЕ ПРИЗОВОЙ ИГРУШКИ\n");
         this.presenter.chooseGiftToy();
     }
     
     public void editWeightToy() {
-        System.out.println("Изменение веса игрушки");
+        System.out.println("\nИЗМЕНЕНИЕ ВЕСА ИГРУШКИ\n");
         int toyId = inputId();
         int toyWeight = inputWeight();
         if ((toyId != -1) && (toyWeight != -1)) {
@@ -74,11 +76,16 @@ public class Console {
     }
     
     public void showToys() {
-        System.out.println("Список игрушек:");
+        System.out.println("\nСПИСОК ИГРУШЕК:\n");
         this.presenter.showToys();
     }
 
-   
+    public void giveGiftToy() {
+        System.out.println("\nВЫДАЧА ПРИЗОВОЙ ИГРУШКИ\n");
+        this.presenter.giveGiftToy();
+
+    }
+
 
     public int inputMenu() {
         System.out.print("Выберите один из пунктов меню: ");
@@ -145,7 +152,7 @@ public class Console {
     }
 
     public int inputWeight() {
-            System.out.println("Введите вес игрушки: ");
+            System.out.println("Введите вес (вероятность выпадения) игрушки от 1 до 100: ");
             String inputWeight = this.scanner.nextLine();
             if (checkTextIsNumber(inputWeight)) {
                 int intWeight = Integer.parseInt(inputWeight);
@@ -163,13 +170,13 @@ public class Console {
     }
 
     public void addToy() {
-        System.out.println("Добавление игрушки");
+        System.out.println("\nДОБАВЛЕНИЕ ИГРУШКИ\n");
         String toyName = inputName();
         int toyQuantity = inputQuantity();
         int toyWeight = inputWeight();
         if ((toyName != null) && (toyQuantity != -1) && (toyWeight != -1)) {
             this.presenter.addToy(toyName, toyQuantity, toyWeight);
-            System.out.println("Игрушка успешно добавлена");
+            System.out.println("\nИгрушка успешно добавлена\n");
         }
 
     }
@@ -181,7 +188,7 @@ public class Console {
 
     public String menu() {
         StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append("\n").append(menu.get(0)).append("\n\n");
+        stringBuilder.append("\n").append(menu.get(0).toUpperCase()).append("\n\n");
         for (int i = 1; i < menu.size(); i++) {
             stringBuilder.append(i).append(". ").append(menu.get(i)).append("\n");
         }

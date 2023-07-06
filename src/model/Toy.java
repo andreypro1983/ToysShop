@@ -58,7 +58,7 @@ public class Toy implements Comparable<Toy> {
     }
 
     public String toString() {
-        return "id: " + this.id + " name: " + this.name + " weight: " + this.weight;
+        return "id: " + this.id + " name: " + this.name + " quantity: " + this.quantity + " weight: " + this.weight;
     }
 
 

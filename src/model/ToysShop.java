@@ -3,10 +3,12 @@ package model;
 public class ToysShop {
     public ToysList toys;
     public ToysDraw draw;
+    public GiftedToyToFile toFile;
 
     private ToysShop(ToysList toys, ToysDraw draw) {
         this.toys = new ToysList();
-        this.draw = new ToysDraw();
+        this.draw = new ToysDraw(this.toys);
+        this.toFile = new GiftedToyToFile();
     }
 
     public ToysShop() {
@@ -24,19 +26,36 @@ public class ToysShop {
     }
 
     public String chooseGiftToy() {
-        this.draw.setToys(this.toys);
-        this.draw.chooseGiftToy();
-        return this.draw.getDrawToys().peekLast().getName();
+        if (this.toys.getToys().isEmpty()) {
+            return "Отсутствуют игрушки для выбора призовой";
+        }
+        else {
+            return this.draw.chooseGiftToy();
+            
+        }
+
 
     }
-    
+
+    public String giveGiftToy() {
+        String giftToy = this.draw.giveGiftToy();
+        if (giftToy != null) {
+            this.toFile.saveToFile(giftToy);
+            return "Выдана призовая игрушка - " + giftToy;
+        }
+        else {
+            return "Отсутствуют призовые игрушки для выдачи";
+        }
+    }
+
+
+
     public String editWeightToy(int id, int weight) {
         if (this.toys.checkExistToyById(id)) {
             Toy editToy = this.toys.getToyById(id);
             this.toys.editWeightToy(editToy, weight);
             return "Вес выпадения игрушки изменен";
-        }
-        else {
+        } else {
             return "Игрушка с таким id не найдена";
         }
     }
