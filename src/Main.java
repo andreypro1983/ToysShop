@@ -1,4 +1,3 @@
-import model.Toy;
 import model.ToysShop;
 import presenter.Presenter;
 import view.Console;
@@ -10,9 +9,6 @@ public class Main {
         Console view = new Console();
         Presenter presenter = new Presenter(toysShop, view);
         view.start();
-
-
-        
 
     }
 }

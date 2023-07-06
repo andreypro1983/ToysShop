@@ -27,13 +27,20 @@ public class ToysShop {
 
     public String chooseGiftToy() {
         if (this.toys.getToys().isEmpty()) {
-            return "Отсутствуют игрушки для выбора призовой";
-        }
-        else {
+            return "ОТСУТСТВУЮТ ИГРУШКИ ДЛЯ ВЫБОРА ПРИЗОВОЙ";
+        } else {
             return this.draw.chooseGiftToy();
-            
+
         }
 
+    }
+
+    public boolean isEmptyToysList() {
+        if (this.toys.getToys().size() > 0) {
+            return false;
+        } else {
+            return true;
+        }
 
     }
 
@@ -42,13 +49,10 @@ public class ToysShop {
         if (giftToy != null) {
             this.toFile.saveToFile(giftToy);
             return "Выдана призовая игрушка - " + giftToy;
-        }
-        else {
-            return "Отсутствуют призовые игрушки для выдачи";
+        } else {
+            return "ОТСУТСТВУЮТ ПРИЗОВЫЕ ИГРУШКИ ДЛЯ ВЫДАЧИ";
         }
     }
-
-
 
     public String editWeightToy(int id, int weight) {
         if (this.toys.checkExistToyById(id)) {
@@ -56,8 +60,9 @@ public class ToysShop {
             this.toys.editWeightToy(editToy, weight);
             return "Вес выпадения игрушки изменен";
         } else {
-            return "Игрушка с таким id не найдена";
+            return "\nИГРУШКА С ТАКИМ id НЕ НАЙДЕНА.";
         }
+
     }
 
 }

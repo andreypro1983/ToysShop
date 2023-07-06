@@ -7,15 +7,11 @@ public class ToysList {
     private ArrayList<Toy> toys;
     private int count;
 
-    // private ToysList(List<Toy> toys) {
-    //     this.toys = toys;
-    // }
-
-      public ToysList() {
+    public ToysList() {
         this.toys = new ArrayList<Toy>();
         this.count = 0;
     }
-    
+
     public void addToy(Toy toy) {
         this.toys.add(toy);
     }
@@ -32,8 +28,6 @@ public class ToysList {
         return toys;
     }
 
-    
-
     public String showToys() {
         StringBuilder stringBuilder = new StringBuilder();
         if (toys.size() > 0) {
@@ -41,9 +35,8 @@ public class ToysList {
                 stringBuilder.append(toy.toString()).append("\n");
             }
             stringBuilder.deleteCharAt(stringBuilder.length() - 1);
-        }
-        else {
-            stringBuilder.append("Список игрушек пуст");
+        } else {
+            stringBuilder.append("СПИСОК ИГРУШЕК ПУСТ");
         }
         return stringBuilder.toString();
     }
@@ -72,7 +65,5 @@ public class ToysList {
         count += 1;
         return count;
     }
-    
-    
-    
+
 }
