@@ -30,7 +30,6 @@ public class ToysShop {
             return "ОТСУТСТВУЮТ ИГРУШКИ ДЛЯ ВЫБОРА ПРИЗОВОЙ";
         } else {
             return this.draw.chooseGiftToy();
-
         }
 
     }
@@ -41,7 +40,6 @@ public class ToysShop {
         } else {
             return true;
         }
-
     }
 
     public String giveGiftToy() {
@@ -62,7 +60,6 @@ public class ToysShop {
         } else {
             return "\nИГРУШКА С ТАКИМ id НЕ НАЙДЕНА.";
         }
-
     }
 
 }

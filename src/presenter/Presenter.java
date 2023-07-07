@@ -1,13 +1,13 @@
 package presenter;
 
 import model.ToysShop;
-import view.Console;
+import view.View;
 
 public class Presenter {
     private ToysShop toysShop;
-    private Console view;
+    private View view;
 
-    public Presenter(ToysShop toysShop, Console view) {
+    public Presenter(ToysShop toysShop, View view) {
         this.toysShop = toysShop;
         this.view = view;
         view.setPresenter(this);

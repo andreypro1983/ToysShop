@@ -1,29 +1,20 @@
 package view;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 import java.util.Scanner;
 import presenter.Presenter;
 
-public class Console {
+public class Console implements View {
     private Presenter presenter;
     private Scanner scanner;
+    private Menu mainMenu;
     private boolean work;
-    private List<String> menu;
     private final String notDigitError = "\nВВЕДЕННЫЕ ДАННЫЕ НЕ ЯВЛЯЮТСЯ ЧИСЛОМ";
     private final String digitPositiveInfoError = "\nВВОДИМОЕ ЗНАЧЕНИЕ ДОЛЖНО БЫТЬ ПОЛОЖИТЕЛЬНЫМ ЦЕЛЫМ ЧИСЛОМ";
 
     public Console() {
         this.scanner = new Scanner(System.in, "Cp866");
         this.work = true;
-        this.menu = new ArrayList<>(Arrays.asList("Главное меню:",
-                "Добавить игрушку",
-                "Показать все игрушки",
-                "Изменить вес выпадения игрушки",
-                "Определить призовую игрушку",
-                "Выдать призовую игрушку",
-                "Выход"));
+        this.mainMenu = new Menu(this);
     }
 
     public void setPresenter(Presenter presenter) {
@@ -36,30 +27,14 @@ public class Console {
 
     public void start() {
         while (work) {
-            System.out.println(menu());
-            int key = inputMenu();
-            switch (key) {
-                case 1:
-                    addToy();
-                    break;
-                case 2:
-                    showToys();
-                    break;
-                case 3:
-                    editWeightToy();
-                    break;
-                case 4:
-                    chooseGiftToy();
-                    break;
-                case 5:
-                    giveGiftToy();
-                    break;
-                case 6:
-                    exit();
-                    break;
-            }
+            printMenu();
+            int command = inputMenu();
+            mainMenu.execute(command);
         }
+    }
 
+    public void printMenu() {
+        System.out.println(mainMenu.show());
     }
 
     public void chooseGiftToy() {
@@ -76,7 +51,6 @@ public class Console {
             int toyWeight = inputWeight();
             if ((toyId != -1) && (toyWeight != -1)) {
                 this.presenter.editWeightToy(toyId, toyWeight);
-
             }
         }
     }
@@ -97,11 +71,10 @@ public class Console {
         String inputData = this.scanner.nextLine();
         if (checkTextIsNumber(inputData)) {
             int inputNumber = Integer.parseInt(inputData);
-            int menuSize = menu.size();
-            if ((inputNumber > 0) && (inputNumber < menuSize)) {
+            if ((inputNumber > 0) && (inputNumber < mainMenu.size() + 1)) {
                 return inputNumber;
             } else {
-                System.out.printf("\nВВЕДЕНО НЕДОПУСТИМОЕ ЧИСЛО. ВВЕДИТЕ ЗНАЧЕНИЕ ОТ 1 ДО %d\n", menuSize - 1);
+                System.out.printf("\nВВЕДЕНО НЕДОПУСТИМОЕ ЧИСЛО. ВВЕДИТЕ ЗНАЧЕНИЕ ОТ 1 ДО %d\n", mainMenu.size());
                 return 0;
             }
         } else {
@@ -189,16 +162,6 @@ public class Console {
     public void exit() {
         System.out.println("\nДО СВИДАНИЯ!");
         work = false;
-    }
-
-    public String menu() {
-        StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append("\n").append(menu.get(0).toUpperCase()).append("\n\n");
-        for (int i = 1; i < menu.size(); i++) {
-            stringBuilder.append(i).append(". ").append(menu.get(i)).append("\n");
-        }
-        return stringBuilder.toString();
-
     }
 
     private boolean checkTextIsNumber(String text) {
